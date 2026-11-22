@@ -1,0 +1,127 @@
+
+[
+  {
+    "id": "R01",
+    "descricao": "Se o aparelho não liga e teve contato com líquido, há suspeita de oxidação",
+    "se": {
+      "liga": "nao",
+      "contato_liquido": "sim"
+    },
+    "entao": {
+      "suspeita": "oxidacao"
+    }
+  },
+  {
+    "id": "R02",
+    "descricao": "Se o aparelho sofreu queda e a tela está danificada, há suspeita de problema na tela",
+    "se": {
+      "sofreu_queda": "sim",
+      "tela_danificada": "sim"
+    },
+    "entao": {
+      "suspeita": "tela"
+    }
+  },
+  {
+    "id": "R03",
+    "descricao": "Se a tela está danificada, há suspeita de defeito na tela",
+    "se": {
+      "tela_danificada": "sim"
+    },
+    "entao": {
+      "suspeita": "tela"
+    }
+  },
+  {
+    "id": "R04",
+    "descricao": "Se o touch não responde normalmente, há suspeita de problema na tela",
+    "se": {
+      "touch_responde": "nao"
+    },
+    "entao": {
+      "suspeita": "tela"
+    }
+  },
+  {
+    "id": "R05",
+    "descricao": "Se a bateria dura pouco, há suspeita de problema na bateria",
+    "se": {
+      "bateria_dura_pouco": "sim"
+    },
+    "entao": {
+      "suspeita": "bateria"
+    }
+  },
+  {
+    "id": "R06",
+    "descricao": "Se o aparelho não carrega normalmente, há suspeita de problema no conector",
+    "se": {
+      "carrega_normalmente": "nao"
+    },
+    "entao": {
+      "suspeita": "conector"
+    }
+  },
+  {
+    "id": "R07",
+    "descricao": "Se o aparelho esquenta muito e a bateria dura pouco, há suspeita de problema na bateria",
+    "se": {
+      "esquenta_muito": "sim",
+      "bateria_dura_pouco": "sim"
+    },
+    "entao": {
+      "suspeita": "bateria"
+    }
+  },
+  {
+    "id": "R08",
+    "descricao": "Se o aparelho trava ou reinicia sozinho, há suspeita de problema de software",
+    "se": {
+      "trava_ou_reinicia": "sim"
+    },
+    "entao": {
+      "suspeita": "software"
+    }
+  },
+  {
+    "id": "R09",
+    "descricao": "Se o som ou alto-falante não funciona, há suspeita de problema no som",
+    "se": {
+      "som_funciona": "nao"
+    },
+    "entao": {
+      "suspeita": "som"
+    }
+  },
+  {
+    "id": "R10",
+    "descricao": "Se a câmera não funciona, há suspeita de problema na câmera",
+    "se": {
+      "camera_funciona": "nao"
+    },
+    "entao": {
+      "suspeita": "camera"
+    }
+  },
+  {
+    "id": "R11",
+    "descricao": "Se o aparelho tem menos de um ano, a situação da garantia é provavelmente favorável",
+    "se": {
+      "idade_aparelho": "menos_de_1_ano"
+    },
+    "entao": {
+      "situacao_garantia": "provavel"
+    }
+  },
+  {
+    "id": "R12",
+    "descricao": "Se o aparelho não liga e não teve contato com líquido, há suspeita de problema de software",
+    "se": {
+      "liga": "nao",
+      "contato_liquido": "nao"
+    },
+    "entao": {
+      "suspeita": "software"
+    }
+  }
+]
