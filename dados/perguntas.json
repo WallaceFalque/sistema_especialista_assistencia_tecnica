@@ -1,0 +1,14 @@
+[
+  {"fato": "liga", "texto": "O aparelho liga?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "contato_liquido", "texto": "O aparelho teve contato com líquido?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "sofreu_queda", "texto": "O aparelho sofreu alguma queda?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "tela_danificada", "texto": "A tela está quebrada ou manchada?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "touch_responde", "texto": "O touch responde normalmente?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "bateria_dura_pouco", "texto": "A bateria dura pouco?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "carrega_normalmente", "texto": "O aparelho carrega normalmente?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "esquenta_muito", "texto": "O aparelho esquenta muito?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "trava_ou_reinicia", "texto": "O aparelho trava ou reinicia sozinho?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "som_funciona", "texto": "O som/alto-falante funciona?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "camera_funciona", "texto": "A câmera funciona?", "opcoes": ["sim", "nao", "nao_sei"]},
+  {"fato": "idade_aparelho", "texto": "Qual a idade do aparelho?", "opcoes": ["menos_de_1_ano", "1_a_2_anos", "mais_de_2_anos", "nao_sei"]}
+]
