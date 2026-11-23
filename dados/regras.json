@@ -1,4 +1,3 @@
-
 [
   {
     "id": "R01",
@@ -122,6 +121,164 @@
     },
     "entao": {
       "suspeita": "software"
+    }
+  },
+  {
+    "id": "R13",
+    "descricao": "Se há suspeita de oxidação, o diagnóstico é oxidação na placa, encaminhada ao técnico de placa",
+    "se": {
+      "suspeita": "oxidacao"
+    },
+    "entao": {
+      "diagnostico": "Oxidação na placa",
+      "encaminhamento": "Técnico de placa",
+      "preco": "R$ 250 a R$ 600"
+    }
+  },
+  {
+    "id": "R14",
+    "descricao": "Se há suspeita de problema na tela e o aparelho sofreu queda, a tela está danificada e precisa de troca",
+    "se": {
+      "suspeita": "tela",
+      "sofreu_queda": "sim"
+    },
+    "entao": {
+      "diagnostico": "Tela danificada",
+      "encaminhamento": "Troca de peça",
+      "preco": "R$ 300 a R$ 900"
+    }
+  },
+  {
+    "id": "R15",
+    "descricao": "Se há suspeita de problema na tela sem queda e a garantia é provável, o defeito é coberto pela garantia",
+    "se": {
+      "suspeita": "tela",
+      "sofreu_queda": "nao",
+      "situacao_garantia": "provavel"
+    },
+    "entao": {
+      "diagnostico": "Defeito coberto pela garantia",
+      "encaminhamento": "Garantia do fabricante",
+      "preco": "R$ 0 (coberto pela garantia)"
+    }
+  },
+  {
+    "id": "R16",
+    "descricao": "Se há suspeita de problema na bateria e o aparelho tem mais de 2 anos, a bateria está degradada",
+    "se": {
+      "suspeita": "bateria",
+      "idade_aparelho": "mais_de_2_anos"
+    },
+    "entao": {
+      "diagnostico": "Bateria degradada",
+      "encaminhamento": "Troca de peça",
+      "preco": "R$ 150 a R$ 350"
+    }
+  },
+  {
+    "id": "R17",
+    "descricao": "Se há suspeita de problema na bateria e o aparelho tem de 1 a 2 anos, a bateria está degradada",
+    "se": {
+      "suspeita": "bateria",
+      "idade_aparelho": "1_a_2_anos"
+    },
+    "entao": {
+      "diagnostico": "Bateria degradada",
+      "encaminhamento": "Troca de peça",
+      "preco": "R$ 150 a R$ 350"
+    }
+  },
+  {
+    "id": "R18",
+    "descricao": "Se há suspeita de problema na bateria, sem contato com líquido e com garantia provável, o defeito é coberto pela garantia",
+    "se": {
+      "suspeita": "bateria",
+      "contato_liquido": "nao",
+      "situacao_garantia": "provavel"
+    },
+    "entao": {
+      "diagnostico": "Defeito coberto pela garantia",
+      "encaminhamento": "Garantia do fabricante",
+      "preco": "R$ 0 (coberto pela garantia)"
+    }
+  },
+  {
+    "id": "R19",
+    "descricao": "Se há suspeita de problema no conector e não houve contato com líquido, o conector de carga está danificado",
+    "se": {
+      "suspeita": "conector",
+      "contato_liquido": "nao"
+    },
+    "entao": {
+      "diagnostico": "Conector de carga danificado",
+      "encaminhamento": "Troca de peça",
+      "preco": "R$ 100 a R$ 250"
+    }
+  },
+  {
+    "id": "R20",
+    "descricao": "Se há suspeita de problema no conector e houve contato com líquido, o conector está oxidado e afeta a placa",
+    "se": {
+      "suspeita": "conector",
+      "contato_liquido": "sim"
+    },
+    "entao": {
+      "diagnostico": "Oxidação na placa",
+      "encaminhamento": "Técnico de placa",
+      "preco": "R$ 250 a R$ 600"
+    }
+  },
+  {
+    "id": "R21",
+    "descricao": "Se há suspeita de problema de software e o aparelho liga, é falha de software resolvida no balcão",
+    "se": {
+      "suspeita": "software",
+      "liga": "sim"
+    },
+    "entao": {
+      "diagnostico": "Falha de software",
+      "encaminhamento": "Resolver no balcão",
+      "preco": "R$ 80 a R$ 150"
+    }
+  },
+  {
+    "id": "R22",
+    "descricao": "Se há suspeita de problema de software e o aparelho não liga (sem líquido), é falha de software que exige reinstalação do sistema pelo técnico",
+    "se": {
+      "suspeita": "software",
+      "liga": "nao",
+      "contato_liquido": "nao"
+    },
+    "entao": {
+      "diagnostico": "Falha de software",
+      "encaminhamento": "Técnico de placa",
+      "preco": "R$ 150 a R$ 300"
+    }
+  },
+  {
+    "id": "R23",
+    "descricao": "Se há suspeita de problema no som e não houve contato com líquido, o alto-falante está com defeito",
+    "se": {
+      "suspeita": "som",
+      "contato_liquido": "nao"
+    },
+    "entao": {
+      "diagnostico": "Alto-falante com defeito",
+      "encaminhamento": "Troca de peça",
+      "preco": "R$ 80 a R$ 200"
+    }
+  },
+  {
+    "id": "R24",
+    "descricao": "Se há suspeita de problema na câmera e não houve contato com líquido, a câmera está com defeito",
+    "se": {
+      "suspeita": "camera",
+      "contato_liquido": "nao"
+    },
+    "entao": {
+      "diagnostico": "Câmera com defeito",
+      "encaminhamento": "Troca de peça",
+      "preco": "R$ 150 a R$ 400"
     }
   }
 ]
