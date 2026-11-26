@@ -280,5 +280,123 @@
       "encaminhamento": "Troca de peça",
       "preco": "R$ 150 a R$ 400"
     }
+  },
+  {
+    "id": "R25",
+    "descricao": "Se o aparelho tem de 1 a 2 anos, a garantia do fabricante provavelmente já venceu",
+    "se": {
+      "idade_aparelho": "1_a_2_anos"
+    },
+    "entao": {
+      "situacao_garantia": "vencida"
+    }
+  },
+  {
+    "id": "R26",
+    "descricao": "Se o aparelho tem mais de 2 anos, a garantia do fabricante já venceu",
+    "se": {
+      "idade_aparelho": "mais_de_2_anos"
+    },
+    "entao": {
+      "situacao_garantia": "vencida"
+    }
+  },
+  {
+    "id": "R27",
+    "descricao": "Se há suspeita de problema na tela sem queda e a garantia venceu, a tela tem defeito e precisa de troca paga",
+    "se": {
+      "suspeita": "tela",
+      "sofreu_queda": "nao",
+      "situacao_garantia": "vencida"
+    },
+    "entao": {
+      "diagnostico": "Defeito na tela (sem queda)",
+      "encaminhamento": "Troca de peça",
+      "preco": "R$ 300 a R$ 900"
+    }
+  },
+  {
+    "id": "R28",
+    "descricao": "Se há suspeita de problema na bateria e houve contato com líquido, a bateria foi danificada pelo líquido",
+    "se": {
+      "suspeita": "bateria",
+      "contato_liquido": "sim"
+    },
+    "entao": {
+      "diagnostico": "Bateria danificada por líquido",
+      "encaminhamento": "Técnico de placa",
+      "preco": "R$ 200 a R$ 500"
+    }
+  },
+  {
+    "id": "R29",
+    "descricao": "Se há suspeita de problema no som e houve contato com líquido, há oxidação nos componentes de áudio",
+    "se": {
+      "suspeita": "som",
+      "contato_liquido": "sim"
+    },
+    "entao": {
+      "diagnostico": "Oxidação na placa",
+      "encaminhamento": "Técnico de placa",
+      "preco": "R$ 250 a R$ 600"
+    }
+  },
+  {
+    "id": "R30",
+    "descricao": "Se há suspeita de problema na câmera e houve contato com líquido, há oxidação no módulo da câmera",
+    "se": {
+      "suspeita": "camera",
+      "contato_liquido": "sim"
+    },
+    "entao": {
+      "diagnostico": "Oxidação na placa",
+      "encaminhamento": "Técnico de placa",
+      "preco": "R$ 250 a R$ 600"
+    }
+  },
+  {
+    "id": "R31",
+    "descricao": "Se o aparelho esquenta muito, há suspeita de superaquecimento",
+    "se": {
+      "esquenta_muito": "sim"
+    },
+    "entao": {
+      "suspeita": "superaquecimento"
+    }
+  },
+  {
+    "id": "R32",
+    "descricao": "Se há suspeita de superaquecimento e o aparelho liga, é preciso avaliar bateria e placa com o técnico",
+    "se": {
+      "suspeita": "superaquecimento",
+      "liga": "sim"
+    },
+    "entao": {
+      "diagnostico": "Superaquecimento (bateria ou placa)",
+      "encaminhamento": "Técnico de placa",
+      "preco": "R$ 120 a R$ 400"
+    }
+  },
+  {
+    "id": "R33",
+    "descricao": "Se o aparelho liga e nenhum sintoma foi relatado, nenhum defeito foi identificado na triagem",
+    "se": {
+      "liga": "sim",
+      "contato_liquido": "nao",
+      "sofreu_queda": "nao",
+      "tela_danificada": "nao",
+      "touch_responde": "sim",
+      "bateria_dura_pouco": "nao",
+      "carrega_normalmente": "sim",
+      "esquenta_muito": "nao",
+      "trava_ou_reinicia": "nao",
+      "som_funciona": "sim",
+      "camera_funciona": "sim"
+    },
+    "entao": {
+      "diagnostico": "Nenhum defeito identificado",
+      "encaminhamento": "Avaliação presencial com técnico",
+      "preco": "A definir após avaliação"
+    }
   }
 ]

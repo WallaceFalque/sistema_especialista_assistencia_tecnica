@@ -3,7 +3,6 @@ import unittest
 import sys
 from pathlib import Path
 
-# Garante que o Python encontre motor.py e base.py na raiz
 RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ))
 
@@ -17,7 +16,6 @@ class TestMotor(unittest.TestCase):
     def setUpClass(cls):
         cls.regras = carregar_regras()
 
-    # TESTE 1: Aparelho não liga e teve contato com líquido
     def test_oxidacao(self):
         fatos = {
             "liga": "nao",
@@ -36,7 +34,6 @@ class TestMotor(unittest.TestCase):
         self.assertIn("R01", ids)
         self.assertIn("R13", ids)
 
-    # TESTE 2: Bateria dura pouco e aparelho tem mais de 2 anos
     def test_bateria_degradada(self):
         fatos = {
             "bateria_dura_pouco": "sim",
@@ -55,7 +52,6 @@ class TestMotor(unittest.TestCase):
         self.assertIn("R05", ids)
         self.assertIn("R16", ids)
 
-    # TESTE 3: Aparelho com menos de um ano e defeito sem queda ou líquido
     def test_garantia(self):
         fatos = {
             "idade_aparelho": "menos_de_1_ano",
@@ -81,7 +77,6 @@ class TestMotor(unittest.TestCase):
         self.assertIn("R11", ids)
         self.assertIn("R15", ids)
 
-    # TESTE 4: Todas as respostas são não sei
     def test_sem_diagnostico(self):
         perguntas = carregar_perguntas()
 
@@ -95,7 +90,6 @@ class TestMotor(unittest.TestCase):
         self.assertNotIn("diagnostico", finais)
         self.assertEqual(disparadas, [])
 
-    # TESTE 5: Integração entre nível 1 e nível 2
     def test_integracao_niveis(self):
         fatos = {
             "camera_funciona": "nao",
@@ -125,11 +119,9 @@ class TestMotor(unittest.TestCase):
         self.assertIn("R10", ids)
         self.assertIn("R24", ids)
 
-    # TESTE 6: A base possui pelo menos 22 regras
     def test_quantidade_regras(self):
         self.assertGreaterEqual(len(self.regras), 22)
 
-    # TESTE 7: Conector com defeito sem contato com líquido
     def test_conector_danificado(self):
         fatos = {
             "carrega_normalmente": "nao",
@@ -148,7 +140,6 @@ class TestMotor(unittest.TestCase):
         self.assertIn("R06", ids)
         self.assertIn("R19", ids)
 
-    # TESTE 8: Falha de software com aparelho ligado
     def test_falha_software(self):
         fatos = {
             "trava_ou_reinicia": "sim",
@@ -166,6 +157,85 @@ class TestMotor(unittest.TestCase):
 
         self.assertIn("R08", ids)
         self.assertIn("R21", ids)
+
+    def test_conflito_entre_suspeitas(self):
+        fatos = {
+            "sofreu_queda": "sim",
+            "tela_danificada": "sim",
+            "bateria_dura_pouco": "sim",
+            "idade_aparelho": "mais_de_2_anos"
+        }
+
+        finais, disparadas = inferir(fatos, self.regras)
+
+        self.assertEqual(finais.get("suspeita"), "tela")
+        self.assertEqual(finais.get("diagnostico"), "Tela danificada")
+
+        ids = [r["id"] for r in disparadas]
+        self.assertIn("R14", ids)
+        self.assertNotIn("R05", ids)
+        self.assertNotIn("R16", ids)
+
+    def test_tela_sem_queda_fora_garantia(self):
+        fatos = {
+            "touch_responde": "nao",
+            "sofreu_queda": "nao",
+            "idade_aparelho": "1_a_2_anos"
+        }
+
+        finais, disparadas = inferir(fatos, self.regras)
+
+        self.assertEqual(finais.get("diagnostico"), "Defeito na tela (sem queda)")
+
+        ids = [r["id"] for r in disparadas]
+        self.assertIn("R04", ids)
+        self.assertIn("R25", ids)
+        self.assertIn("R27", ids)
+
+    def test_camera_com_liquido(self):
+        fatos = {
+            "camera_funciona": "nao",
+            "contato_liquido": "sim"
+        }
+
+        finais, _ = inferir(fatos, self.regras)
+
+        self.assertEqual(finais.get("diagnostico"), "Oxidação na placa")
+
+    def test_sem_defeito(self):
+        fatos = {
+            "liga": "sim",
+            "contato_liquido": "nao",
+            "sofreu_queda": "nao",
+            "tela_danificada": "nao",
+            "touch_responde": "sim",
+            "bateria_dura_pouco": "nao",
+            "carrega_normalmente": "sim",
+            "esquenta_muito": "nao",
+            "trava_ou_reinicia": "nao",
+            "som_funciona": "sim",
+            "camera_funciona": "sim",
+            "idade_aparelho": "mais_de_2_anos"
+        }
+
+        finais, disparadas = inferir(fatos, self.regras)
+
+        self.assertEqual(finais.get("diagnostico"), "Nenhum defeito identificado")
+        self.assertIn("R33", [r["id"] for r in disparadas])
+
+    def test_superaquecimento(self):
+        fatos = {
+            "esquenta_muito": "sim",
+            "bateria_dura_pouco": "nao",
+            "liga": "sim"
+        }
+
+        finais, _ = inferir(fatos, self.regras)
+
+        self.assertEqual(
+            finais.get("diagnostico"),
+            "Superaquecimento (bateria ou placa)"
+        )
 
 
 if __name__ == "__main__":

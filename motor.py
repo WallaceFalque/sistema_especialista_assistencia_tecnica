@@ -11,7 +11,11 @@
                 valor != "nao_sei" and fatos_finais.get(fato) == valor
                 for fato, valor in regra["se"].items()
             )
-            if condicoes_batem:
+            conflita = any(
+                fato in fatos_finais and fatos_finais[fato] != valor
+                for fato, valor in regra["entao"].items()
+            )
+            if condicoes_batem and not conflita:
                 fatos_finais.update(regra["entao"])
                 regras_disparadas.append(regra)
                 disparou = True

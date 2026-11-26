@@ -95,7 +95,7 @@ Armazena as perguntas e opções de resposta.
 
 dados/regras.json
 
-Armazena as 24 regras do sistema especialista.
+Armazena as 33 regras do sistema especialista.
 
 tests/__init__.py
 
@@ -133,13 +133,17 @@ Esse processo continua enquanto novas regras puderem ser ativadas. Assim, uma co
 
 Quando nenhuma outra regra pode ser ativada, o processo termina e o sistema apresenta os resultados encontrados.
 
+Resolução de conflitos
+
+Quando o aparelho apresenta mais de um sintoma, mais de uma regra pode concluir valores diferentes para o mesmo fato (por exemplo, suspeita = tela e suspeita = bateria). Para evitar que uma conclusão sobrescreva a outra, o motor só dispara uma regra se a conclusão dela não contradiz um fato já estabelecido. Assim, a ordem das regras em dados/regras.json define a prioridade: vale a primeira regra aplicável, e as regras em conflito não disparam nem aparecem na explicação.
+
 6. Base de conhecimento: todas as regras
 
-A base de conhecimento possui 24 regras, divididas em dois níveis:
+A base de conhecimento possui 33 regras, divididas em dois níveis:
 
-Nível 1 (R01 a R12): identifica suspeitas e situações intermediárias a partir das respostas do usuário.
+Nível 1 (R01 a R12, R25, R26 e R31): identifica suspeitas e situações intermediárias a partir das respostas do usuário.
 
-Nível 2 (R13 a R24): utiliza as suspeitas identificadas para determinar o diagnóstico, o encaminhamento e o preço estimado.
+Nível 2 (R13 a R24, R27 a R30, R32 e R33): utiliza as suspeitas identificadas para determinar o diagnóstico, o encaminhamento e o preço estimado.
 
 A tabela abaixo documenta as regras cadastradas em dados/regras.json.
 
@@ -223,6 +227,24 @@ liga = nao E contato_liquido = nao
 
 suspeita = software
 
+R25
+
+idade_aparelho = 1_a_2_anos
+
+situacao_garantia = vencida
+
+R26
+
+idade_aparelho = mais_de_2_anos
+
+situacao_garantia = vencida
+
+R31
+
+esquenta_muito = sim
+
+suspeita = superaquecimento
+
 Regras de nível 2
 
 ID
@@ -302,6 +324,42 @@ R24
 suspeita = camera E contato_liquido = nao
 
 Diagnóstico: Câmera com defeito; encaminhamento: Troca de peça; preço: R$ 150 a R$ 400.
+
+R27
+
+suspeita = tela E sofreu_queda = nao E situacao_garantia = vencida
+
+Diagnóstico: Defeito na tela (sem queda); encaminhamento: Troca de peça; preço: R$ 300 a R$ 900.
+
+R28
+
+suspeita = bateria E contato_liquido = sim
+
+Diagnóstico: Bateria danificada por líquido; encaminhamento: Técnico de placa; preço: R$ 200 a R$ 500.
+
+R29
+
+suspeita = som E contato_liquido = sim
+
+Diagnóstico: Oxidação na placa; encaminhamento: Técnico de placa; preço: R$ 250 a R$ 600.
+
+R30
+
+suspeita = camera E contato_liquido = sim
+
+Diagnóstico: Oxidação na placa; encaminhamento: Técnico de placa; preço: R$ 250 a R$ 600.
+
+R32
+
+suspeita = superaquecimento E liga = sim
+
+Diagnóstico: Superaquecimento (bateria ou placa); encaminhamento: Técnico de placa; preço: R$ 120 a R$ 400.
+
+R33
+
+liga = sim E nenhum sintoma relatado (sem líquido, sem queda, tela e touch ok, bateria ok, carrega, não esquenta, não trava, som e câmera ok)
+
+Diagnóstico: Nenhum defeito identificado; encaminhamento: Avaliação presencial com técnico; preço: A definir após avaliação.
 
 7. Como adicionar uma nova regra
 

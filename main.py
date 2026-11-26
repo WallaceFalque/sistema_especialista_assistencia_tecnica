@@ -19,10 +19,10 @@ def sobre():
 
 
 def normalizar(texto):
-    texto = "_".join(texto.lower().split())
+    texto = "_".join(texto.lower().replace("ã", "a").split())
     if texto == "s":
         return "sim"
-    if texto in ("n", "não"):
+    if texto == "n":
         return "nao"
     return texto
 
